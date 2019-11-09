@@ -6,6 +6,7 @@ class Table extends Component {
     render() {
         const { data } = this.props;
         const { handleDel } = this.props;
+        const { sortingAge } = this.props;
         let tableTemplate;
 
         function makeColumns(row) {
@@ -39,6 +40,7 @@ class Table extends Component {
                             {tableTemplate}
                         </tbody >
                     </table>
+                    <button onClick={sortingAge}>Sorting by age</button>
                 </div >
                 <div className="array_of_delete_buttons">
                     {data.map((item, index) =>
