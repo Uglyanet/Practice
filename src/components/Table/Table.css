@@ -23,11 +23,6 @@ tr{
     border: 1px solid #ddd;
 }
 
-tr:hover {
-    background-color: red;
-    color: seashell;
-}
-
 th {
     text-align: left;
     background-color: #4CAF50;

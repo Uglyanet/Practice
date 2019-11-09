@@ -3,15 +3,9 @@ import './Table.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
 
 class Table extends Component {
-
     render() {
-        const data = [
-            { 'firstName': 'Max', 'lastName': 'Bezvuhliak', 'phone': '+380683932929', 'age': 20 },
-            { 'firstName': 'MaxOSDvsdv', 'lastName': 'Bezvuhliak', 'phone': '+380683932929', 'age': 20 },
-            { 'firstName': 'Max', 'lastName': 'Bezvuhliak', 'phone': '+380683932929', 'age': 20 },
-        ]
-
-
+        const { data } = this.props;
+        const { handleDel } = this.props;
         let tableTemplate;
 
         function makeColumns(row) {
@@ -47,9 +41,8 @@ class Table extends Component {
                     </table>
                 </div >
                 <div className="array_of_delete_buttons">
-                    {/* Нихуя не понятно */}
                     {data.map((item, index) =>
-                        <DeleteButton num_of_row={index} key={index} data={data} />
+                        <DeleteButton num_of_row={index} key={index} data={data} handleDel={handleDel} />
                     )}
                 </div>
             </div>

@@ -70,6 +70,7 @@ class Form extends Component {
     }
 
     render() {
+        const { handleAdd } = this.props;
         return (
             <div className="form">
                 <div className="error_panel">
@@ -84,7 +85,18 @@ class Form extends Component {
                     <input type="text" name="phone" value={this.state.phone} onChange={this.handleUserInput} />
                     <label>Age</label>
                     <input type="text" name="age" value={this.state.age} onChange={this.handleUserInput} />
-                    <button type="submit" disabled={!this.state.formValid}>Add to table</button>
+                    {/* <button type="submit" disabled={!this.state.formValid} onClick={handleAdd}>Add to table</button> */}
+                    <button 
+                    type="submit" 
+                    disabled={!this.state.formValid} 
+                    onClick={() => {
+                        handleAdd({
+                            'firstName': this.state.firstName,
+                            'lastName': this.state.lastName,
+                            'phone': this.state.phone,
+                            'age': this.state.age
+                        })
+                    }}>Add to table</button>
                 </form>
             </div >
         )
