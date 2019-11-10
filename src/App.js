@@ -8,39 +8,66 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    // if (JSON.parse(localStorage.getItem("main_array"))) {
-    //   localStorage.setItem("main_array", JSON.stringify([]));
-    // }
-    // localStorage.setItem("main_array", JSON.stringify([]));
-    // this.state = {
-    //   data: JSON.parse(localStorage.getItem("main_array")),
-    // }
     this.state = {
-      data: [
-        { 'firstName': 'Max1', 'lastName': 'Bezvugliak', 'phone': '380683932929', 'age': '27' },
-        { 'firstName': 'Max2', 'lastName': 'Bezvugliak', 'phone': '380683932929', 'age': '23' },
-        { 'firstName': 'Max3', 'lastName': 'Bezvugliak', 'phone': '380683932929', 'age': '24' },
-        { 'firstName': 'Max4', 'lastName': 'Bezvugliak', 'phone': '380683932929', 'age': '25' },
-      ],
+      data: [],
     }
 
   };
 
   handleAdd = (row) => {
     this.setState(this.state.data.splice(0, 0, row));
-    console.log(this.state.data);
     localStorage.setItem("main_array", JSON.stringify(this.state.data));
-    console.log(JSON.parse(localStorage.getItem("main_array")));
   }
 
   handleDel = (row) => {
     this.setState(this.state.data.splice(row, 1));
-    console.log(JSON.parse(localStorage.getItem("main_array")));
+    // console.log(JSON.parse(localStorage.getItem("main_array")));
     localStorage.setItem("main_array", JSON.stringify(this.state.data));
   }
 
-  sortingAge = () => {
-    alert('sort, no ne sortiruet');
+  sorting = (val) => {
+    this.setState(this.state.data.sort(function (a, b) {
+      switch (val) {
+        case 'name': {
+          if (a.firstName > b.firstName) {
+            return 1;
+          }
+          if (a.firstName < b.firstName) {
+            return -1;
+          }
+          return 0;
+        }
+        case 'surname': {
+          if (a.lastName > b.lastName) {
+            return 1;
+          }
+          if (a.lastName < b.lastName) {
+            return -1;
+          }
+          return 0;
+        }
+        case 'phone': {
+          if (a.phone > b.phone) {
+            return 1;
+          }
+          if (a.phone < b.phone) {
+            return -1;
+          }
+          return 0;
+        }
+        case 'age': {
+          if (a.age > b.age) {
+            return 1;
+          }
+          if (a.age < b.age) {
+            return -1;
+          }
+          return 0;
+        }
+        default: break;
+
+      }
+    }));
   }
 
   render() {
@@ -51,7 +78,7 @@ class App extends Component {
           <Table
             data={this.state.data}
             handleDel={this.handleDel}
-            sortingAge={this.sortingAge}
+            sorting={this.sorting}
           />}
       </div>
     );

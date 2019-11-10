@@ -76,7 +76,7 @@ class Form extends Component {
                 <div className="error_panel">
                     <FormErrors formErrors={this.state.formErrors} />
                 </div>
-                <form className="valid_form">
+                <form className="valid_form" id="myForm">
                     <label>First Name</label>
                     <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleUserInput} />
                     <label>Last Name</label>
@@ -85,11 +85,11 @@ class Form extends Component {
                     <input type="text" name="phone" value={this.state.phone} onChange={this.handleUserInput} />
                     <label>Age</label>
                     <input type="text" name="age" value={this.state.age} onChange={this.handleUserInput} />
-                    {/* <button type="submit" disabled={!this.state.formValid} onClick={handleAdd}>Add to table</button> */}
                     <button
                         type="submit"
                         disabled={!this.state.formValid}
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.preventDefault();
                             handleAdd({
                                 'firstName': this.state.firstName,
                                 'lastName': this.state.lastName,
