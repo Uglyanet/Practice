@@ -89,7 +89,8 @@ class Form extends Component {
                         type="submit"
                         disabled={!this.state.formValid}
                         onClick={(e) => {
-                            e.preventDefault();
+                            //Если снять коммент с нижней строки то перестанет работать очистка формы
+                            // e.preventDefault();
                             handleAdd({
                                 'firstName': this.state.firstName,
                                 'lastName': this.state.lastName,
