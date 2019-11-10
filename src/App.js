@@ -9,7 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      data: JSON.parse(localStorage.getItem("main_array"))?
+      JSON.parse(localStorage.getItem("main_array")):[],
     }
 
   };

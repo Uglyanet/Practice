@@ -76,7 +76,7 @@ class Form extends Component {
                 <div className="error_panel">
                     <FormErrors formErrors={this.state.formErrors} />
                 </div>
-                <form className="valid_form" id="myForm">
+                <form className="valid_form">
                     <label>First Name</label>
                     <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleUserInput} />
                     <label>Last Name</label>
@@ -95,7 +95,7 @@ class Form extends Component {
                                 'lastName': this.state.lastName,
                                 'phone': this.state.phone,
                                 'age': this.state.age
-                            })
+                            });
                         }}>Add to table</button>
                 </form>
             </div >
