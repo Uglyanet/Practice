@@ -20,17 +20,13 @@ class Form extends Component {
     }
 
     handleUserInput = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
+        const { name, value } = e.target;
         this.setState({ [name]: value }, () => { this.validateField(name, value) });
     }
 
     validateField(fieldName, value) {
+        let { firstNameValid, lastNameValid, phoneValid, ageValid } = this.state;
         let fieldValidationErrors = this.state.formErrors;
-        let firstNameValid = this.state.firstNameValid;
-        let lastNameValid = this.state.lastNameValid;
-        let phoneValid = this.state.phoneValid;
-        let ageValid = this.state.ageValid;
 
         switch (fieldName) {
             case 'firstName':
@@ -61,41 +57,42 @@ class Form extends Component {
         }, this.validateForm);
     }
     validateForm() {
+        const { firstNameValid, lastNameValid, phoneValid, ageValid } = this.state;
         this.setState({
-            formValid: this.state.firstNameValid &&
-                this.state.lastNameValid &&
-                this.state.phoneValid &&
-                this.state.ageValid
+            formValid: firstNameValid &&
+                lastNameValid &&
+                phoneValid &&
+                ageValid
         });
     }
 
     render() {
         const { handleAdd } = this.props;
+        const { formValid, formErrors, firstName, lastName, phone, age } = this.state;
+        const { handleUserInput } = this;
         return (
             <div className="form">
                 <div className="error_panel">
-                    <FormErrors formErrors={this.state.formErrors} />
+                    <FormErrors formErrors={formErrors} />
                 </div>
                 <form className="valid_form">
                     <label>First Name</label>
-                    <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleUserInput} />
+                    <input type="text" name="firstName" value={firstName} onChange={handleUserInput} />
                     <label>Last Name</label>
-                    <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleUserInput} />
+                    <input type="text" name="lastName" value={lastName} onChange={handleUserInput} />
                     <label>Phone</label>
-                    <input type="text" name="phone" value={this.state.phone} onChange={this.handleUserInput} />
+                    <input type="text" name="phone" value={phone} onChange={handleUserInput} />
                     <label>Age</label>
-                    <input type="text" name="age" value={this.state.age} onChange={this.handleUserInput} />
+                    <input type="text" name="age" value={age} onChange={handleUserInput} />
                     <button
                         type="submit"
-                        disabled={!this.state.formValid}
-                        onClick={(e) => {
-                            //Если снять коммент с нижней строки то перестанет работать очистка формы
-                            // e.preventDefault();
+                        disabled={!formValid}
+                        onClick={() => {
                             handleAdd({
-                                'firstName': this.state.firstName,
-                                'lastName': this.state.lastName,
-                                'phone': this.state.phone,
-                                'age': this.state.age
+                                'firstName': firstName,
+                                'lastName': lastName,
+                                'phone': phone,
+                                'age': age
                             });
                         }}>Add to table</button>
                 </form>

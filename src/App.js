@@ -9,8 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: JSON.parse(localStorage.getItem("main_array"))?
-      JSON.parse(localStorage.getItem("main_array")):[],
+      data: JSON.parse(localStorage.getItem("main_array")) ?
+        JSON.parse(localStorage.getItem("main_array")) : [],
     }
 
   };
@@ -26,60 +26,30 @@ class App extends Component {
     localStorage.setItem("main_array", JSON.stringify(this.state.data));
   }
 
-  sorting = (val) => {
+  sorting = (val, dir) => {
     this.setState(this.state.data.sort(function (a, b) {
-      switch (val) {
-        case 'name': {
-          if (a.firstName > b.firstName) {
-            return 1;
-          }
-          if (a.firstName < b.firstName) {
-            return -1;
-          }
-          return 0;
-        }
-        case 'surname': {
-          if (a.lastName > b.lastName) {
-            return 1;
-          }
-          if (a.lastName < b.lastName) {
-            return -1;
-          }
-          return 0;
-        }
-        case 'phone': {
-          if (a.phone > b.phone) {
-            return 1;
-          }
-          if (a.phone < b.phone) {
-            return -1;
-          }
-          return 0;
-        }
-        case 'age': {
-          if (a.age > b.age) {
-            return 1;
-          }
-          if (a.age < b.age) {
-            return -1;
-          }
-          return 0;
-        }
-        default: break;
-
+      if (a[val] > b[val]) {
+        if(dir === 1){return 1;} else{return -1;}
       }
-    }));
+      if (a[val] < b[val]) {
+        if(dir === 1){return -1;} else{return 1;}
+      }
+      return 0;
+    }
+    ));
   }
 
   render() {
+    const { data } = this.state;
+    const { handleAdd, handleDel, sorting } = this;
     return (
       <div className="App">
-        <Form handleAdd={this.handleAdd} />
-        {this.state.data.length >= 1 &&
+        <Form handleAdd={handleAdd} />
+        {data.length >= 1 &&
           <Table
-            data={this.state.data}
-            handleDel={this.handleDel}
-            sorting={this.sorting}
+            data={data}
+            handleDel={handleDel}
+            sorting={sorting}
           />}
       </div>
     );
