@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FormErrors from '../FormErrors/FormErrors';
+import InputLabel from '../InputLabel/InputLabel';
 import './Form.css';
 
 class Form extends Component {
@@ -25,31 +26,30 @@ class Form extends Component {
     }
 
     validateField(fieldName, value) {
-        let { firstNameValid, lastNameValid, phoneValid, ageValid } = this.state;
-        let fieldValidationErrors = this.state.formErrors;
+        let { firstNameValid, lastNameValid, phoneValid, ageValid, formErrors } = this.state;
 
         switch (fieldName) {
             case 'firstName':
                 firstNameValid = value.match(/^([A-Z]+)([a-z]{1,20})$/i);
-                fieldValidationErrors.firstName = firstNameValid ? '' : ' is invalid';
+                formErrors.firstName = firstNameValid ? '' : ' is invalid';
                 break;
             case 'lastName':
                 lastNameValid = value.match(/^([A-Z]+)([a-z]{1,20})$/i);
-                fieldValidationErrors.lastName = lastNameValid ? '' : ' is invalid';
+                formErrors.lastName = lastNameValid ? '' : ' is invalid';
                 break;
             case 'phone':
                 phoneValid = value.match(/^([0-9]{11,20})$/i);
-                fieldValidationErrors.phone = phoneValid ? '' : ' is invalid';
+                formErrors.phone = phoneValid ? '' : ' is invalid';
                 break;
             case 'age':
                 ageValid = value.match(/^([0-9]{1,3})$/i);
-                fieldValidationErrors.age = ageValid ? '' : ' is invalid';
+                formErrors.age = ageValid ? '' : ' is invalid';
                 break;
             default:
                 break;
         }
         this.setState({
-            formErrors: fieldValidationErrors,
+            formErrors: formErrors,
             firstNameValid: firstNameValid,
             lastNameValid: lastNameValid,
             phoneValid: phoneValid,
@@ -76,24 +76,15 @@ class Form extends Component {
                     <FormErrors formErrors={formErrors} />
                 </div>
                 <form className="valid_form">
-                    <label>First Name</label>
-                    <input type="text" name="firstName" value={firstName} onChange={handleUserInput} />
-                    <label>Last Name</label>
-                    <input type="text" name="lastName" value={lastName} onChange={handleUserInput} />
-                    <label>Phone</label>
-                    <input type="text" name="phone" value={phone} onChange={handleUserInput} />
-                    <label>Age</label>
-                    <input type="text" name="age" value={age} onChange={handleUserInput} />
+                    <InputLabel label_text="First Name" name="firstName" value={firstName} handleUserInput={handleUserInput} />
+                    <InputLabel label_text="Last Name" name="lastName" value={lastName} handleUserInput={handleUserInput} />
+                    <InputLabel label_text="Phone" name="phone" value={phone} handleUserInput={handleUserInput} />
+                    <InputLabel label_text="Age" name="age" value={age} handleUserInput={handleUserInput} />
                     <button
                         type="submit"
                         disabled={!formValid}
                         onClick={() => {
-                            handleAdd({
-                                'firstName': firstName,
-                                'lastName': lastName,
-                                'phone': phone,
-                                'age': age
-                            });
+                            handleAdd({ 'firstName': firstName, 'lastName': lastName, 'phone': phone, 'age': age });
                         }}>Add to table</button>
                 </form>
             </div >

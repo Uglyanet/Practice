@@ -22,17 +22,16 @@ class App extends Component {
 
   handleDel = (row) => {
     this.setState(this.state.data.splice(row, 1));
-    // console.log(JSON.parse(localStorage.getItem("main_array")));
     localStorage.setItem("main_array", JSON.stringify(this.state.data));
   }
 
   sorting = (val, dir) => {
     this.setState(this.state.data.sort(function (a, b) {
       if (a[val] > b[val]) {
-        if(dir === 1){return 1;} else{return -1;}
+        if (dir === 1) { return 1; } else { return -1; }
       }
       if (a[val] < b[val]) {
-        if(dir === 1){return -1;} else{return 1;}
+        if (dir === 1) { return -1; } else { return 1; }
       }
       return 0;
     }
