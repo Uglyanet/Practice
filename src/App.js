@@ -25,13 +25,16 @@ class App extends Component {
     localStorage.setItem("main_array", JSON.stringify(this.state.data));
   }
 
-  sorting = (val, dir) => {
+  sorting = (val, dir, type) => {
     this.setState(this.state.data.sort(function (a, b) {
+      if (type === "num"){
+        return dir === 1 ? a[val] - b[val] : b[val] - a[val];
+      }
       if (a[val] > b[val]) {
-        if (dir === 1) { return 1; } else { return -1; }
+        return dir === 1 ? 1 : -1;
       }
       if (a[val] < b[val]) {
-        if (dir === 1) { return -1; } else { return 1; }
+        return dir === 1 ? -1 : 1;
       }
       return 0;
     }

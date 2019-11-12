@@ -69,17 +69,16 @@ class Form extends Component {
     render() {
         const { handleAdd } = this.props;
         const { formValid, formErrors, firstName, lastName, phone, age } = this.state;
-        const { handleUserInput } = this;
         return (
             <div className="form">
                 <div className="error_panel">
                     <FormErrors formErrors={formErrors} />
                 </div>
                 <form className="valid_form">
-                    <InputLabel label_text="First Name" name="firstName" value={firstName} handleUserInput={handleUserInput} />
-                    <InputLabel label_text="Last Name" name="lastName" value={lastName} handleUserInput={handleUserInput} />
-                    <InputLabel label_text="Phone" name="phone" value={phone} handleUserInput={handleUserInput} />
-                    <InputLabel label_text="Age" name="age" value={age} handleUserInput={handleUserInput} />
+                    <InputLabel label_text="First Name" name="firstName" value={firstName} handleUserInput={this.handleUserInput} />
+                    <InputLabel label_text="Last Name" name="lastName" value={lastName} handleUserInput={this.handleUserInput} />
+                    <InputLabel label_text="Phone" name="phone" value={phone} handleUserInput={this.handleUserInput} />
+                    <InputLabel label_text="Age" name="age" value={age} handleUserInput={this.handleUserInput} />
                     <button
                         type="submit"
                         disabled={!formValid}

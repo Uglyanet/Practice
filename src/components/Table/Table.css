@@ -16,8 +16,7 @@
 }
 
 td, th {
-    border: 1px solid #ddd;
-}
+    border: 1px solid #ddd;}
 
 tr{
     border: 1px solid #ddd;
@@ -46,4 +45,9 @@ th {
     text-align: center;
     text-decoration: none;
     display: inline-block;
+}
+
+.sort_container{
+    display: flex;
+    flex-direction: column;
 }
